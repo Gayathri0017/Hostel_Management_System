@@ -1,6 +1,6 @@
 import java.lang.*;
 import java.util.*;
-//Java
+//Java program
 class User {
     String username,password,role;
 
