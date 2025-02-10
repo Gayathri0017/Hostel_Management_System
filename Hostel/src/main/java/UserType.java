@@ -1,5 +1,6 @@
 import java.lang.*;
 import java.util.*;
+//Java
 class User {
     String username,password,role;
 
@@ -48,7 +49,7 @@ public class UserType {
     {
         if (userCount>=Max) 
         {
-            System.out.println("User limit reached.");
+            System.out.println("Users limit reached.");
             return;
         }
 
