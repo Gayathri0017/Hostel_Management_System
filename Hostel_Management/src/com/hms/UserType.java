@@ -3,7 +3,7 @@ package com.hms;
 import java.util.*;
 import java.lang.*;
 class User{
-    String username,password,role;
+    String username,password,role;//comments are added
 
     User(String username,String password,String role) 
     {
