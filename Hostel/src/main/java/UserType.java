@@ -1,10 +1,9 @@
 import java.lang.*;
 import java.util.*;
-//updated java
 class User {
-    String username,password,number,role;
+    String username,password,role;
 
-    User(String username,String password,String Number,String role) 
+    User(String username,String password,String role) 
     {
     	this.username=username;
         this.password=password;
@@ -63,8 +62,6 @@ public class UserType {
 
         System.out.print("Enter password:");
         String password=s.nextLine();
-        System.out.println("Enter the phone number:");
-        String Number=s.nextLine();
         System.out.print("Enter role (Student/Admin/Warden): ");
         String role=s.nextLine();
 
@@ -73,7 +70,7 @@ public class UserType {
             System.out.println("Invalid role. Please enter Student, Admin, or Warden.");
             return;
         }
-        users[userCount++]=new User(username,password,Number,role);
+        users[userCount++]=new User(username,password,role);
         System.out.println("Registration successful!");
     }
 
