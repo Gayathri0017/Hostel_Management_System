@@ -6,7 +6,7 @@ public class Hmsfees {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
         FeesManagement fees = new FeesManagement();
-
+        //comments passed
         while (true) {
             System.out.println("-----Hostel Fees Management-----");
             System.out.println("1) Set Food Preference");
