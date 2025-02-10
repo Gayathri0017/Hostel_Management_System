@@ -1,4 +1,4 @@
-package Hostel;
+package hostels;
 import java.util.*;
 class Rooms{
 	private static final int capacity=50;
