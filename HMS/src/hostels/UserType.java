@@ -2,12 +2,13 @@ package hostels;
 import java.lang.*;
 import java.util.*;
 class User {
-    String username,password,role;
+    String username,password,role,number;
 
-    User(String username,String password,String role) 
+    User(String username,String password,String Number,String role) 
     {
     	this.username=username;
         this.password=password;
+        this.number=Number;
         this.role=role;
     }
 }
@@ -63,6 +64,8 @@ public class UserType {
 
         System.out.print("Enter password:");
         String password=s.nextLine();
+        System.out.println("Enter the number:");
+        String Number=s.next();
         System.out.print("Enter role (Student/Admin/Warden): ");
         String role=s.nextLine();
 
@@ -71,7 +74,7 @@ public class UserType {
             System.out.println("Invalid role. Please enter Student, Admin, or Warden.");
             return;
         }
-        users[userCount++]=new User(username,password,role);
+        users[userCount++]=new User(username,password,Number,role);
         System.out.println("Registration successful!");
     }
 
