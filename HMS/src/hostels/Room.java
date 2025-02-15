@@ -81,8 +81,7 @@ public class Room{
 		default:
 			System.out.println("Invalid choice!,Please enter a valid Choice");
 			break;
-			}
-		sc.close();
+		}
 		}
 	}
 }
