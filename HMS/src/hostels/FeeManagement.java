@@ -1,6 +1,6 @@
 package hostels;
 import java.util.*;
-public class Hmsfees {
+public class FeeManagement {
 
 	public static void main(String[] args) {
 			        Scanner sc = new Scanner(System.in);
