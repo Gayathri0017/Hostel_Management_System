@@ -130,10 +130,12 @@ class Rooms{
 	        }
 	    }
 }
+/*
 public class Room{
 	public static void main(String args[]){
 	Scanner sc=new Scanner(System.in);
 	Rooms r=new Rooms();
+	
 	while(true) {
 		System.out.println("-----Hostel Room Management-----");
 		System.out.println("1)View Rooms");
@@ -181,3 +183,4 @@ public class Room{
 	}
 }
 }
+*/
