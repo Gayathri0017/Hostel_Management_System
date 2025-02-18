@@ -1,13 +1,12 @@
 package hostels;
-<<<<<<< HEAD
 import java.lang.*;
 import java.util.*;
 
-class Users {
+class User1 {
     String userID, name, role;
     List<String> messages = new ArrayList<>();
 
-    Users(String userID, String name, String role) {
+    User1(String userID, String name, String role) {
         this.userID = userID;
         this.name = name;
         this.role = role;
@@ -27,14 +26,14 @@ class Users {
 }
 
 class NotificationService {
-    static void sendNotification(Users user, String notification) {
+    static void sendNotification(User1 user, String notification) {
         System.out.println("Notification to " + user.name + ": " + notification);
         user.receiveMessage("[Notification] " + notification);
     }
 }
 
 class CommunicationService {
-    static void sendMessage(Users sender, Users receiver, String message) {
+    static void sendMessage(User1 sender, User1 receiver, String message) {
         if (sender.role.equalsIgnoreCase("Admin")) {
             receiver.receiveMessage("Message from Admin " + sender.name + ": " + message);
         } else {
@@ -44,12 +43,12 @@ class CommunicationService {
 }
 
 public class Notification {
-    private static List<Users> users = new ArrayList<>();
+    private static List<User1> users = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Users admin = new Users("A1", "AdminUser", "Admin");
-        Users student = new Users("S1", "StudentUser", "Student");
+        User1 admin = new User1("A1", "AdminUser", "Admin");
+        User1 student = new User1("S1", "StudentUser", "Student");
         users.add(admin);
         users.add(student);
 
@@ -84,7 +83,7 @@ public class Notification {
     private static void sendMessage() {
         System.out.print("Enter Admin ID: ");
         String adminID = scanner.nextLine();
-        Users admin = findUserByID(adminID);
+        User1 admin = findUserByID(adminID);
 
         if (admin == null || !admin.role.equalsIgnoreCase("Admin")) {
             System.out.println("Invalid admin ID.");
@@ -93,7 +92,7 @@ public class Notification {
 
         System.out.print("Enter Student ID: ");
         String studentID = scanner.nextLine();
-        Users student = findUserByID(studentID);
+        User1 student = findUserByID(studentID);
 
         if (student == null || !student.role.equalsIgnoreCase("Student")) {
             System.out.println("Invalid student ID.");
@@ -108,7 +107,7 @@ public class Notification {
     private static void sendNotification() {
         System.out.print("Enter User ID: ");
         String userID = scanner.nextLine();
-        Users user = findUserByID(userID);
+        User1 user = findUserByID(userID);
 
         if (user == null) {
             System.out.println("User not found.");
@@ -123,7 +122,7 @@ public class Notification {
     private static void viewMessages() {
         System.out.print("Enter User ID: ");
         String userID = scanner.nextLine();
-        Users user = findUserByID(userID);
+        User1 user = findUserByID(userID);
 
         if (user == null) {
             System.out.println("User not found.");
@@ -133,17 +132,12 @@ public class Notification {
         user.showMessages();
     }
 
-    private static Users findUserByID(String userID) {
-        for (Users user : users) {
+    private static User1 findUserByID(String userID) {
+        for (User1 user : users) {
             if (user.userID.equals(userID)) {
                 return user;
             }
         }
         return null;
     }
-=======
-
-public class Notification {
-
->>>>>>> branch 'main' of https://github.com/Gayathri0017/Hostel_Management_System.git
 }
