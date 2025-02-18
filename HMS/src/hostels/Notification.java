@@ -1,4 +1,5 @@
 package hostels;
+<<<<<<< HEAD
 import java.lang.*;
 import java.util.*;
 
@@ -140,4 +141,9 @@ public class Notification {
         }
         return null;
     }
+=======
+
+public class Notification {
+
+>>>>>>> branch 'main' of https://github.com/Gayathri0017/Hostel_Management_System.git
 }
