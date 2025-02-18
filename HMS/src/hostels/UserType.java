@@ -22,7 +22,7 @@ public class UserType
     private static User[] users=new User[Max];
     private static int userCount=0;
     private static Scanner s=new Scanner(System.in);
-
+    //comments
     public static void main(String[] args) 
     {
         while(true) 
