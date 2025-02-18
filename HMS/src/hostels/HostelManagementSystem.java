@@ -56,23 +56,21 @@ public class HostelManagementSystem {
         while (!isAuthenticated) {
             System.out.println("\n1) Register\n2) Login");
             int option = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            sc.nextLine();
 
             if (option == 1) {
-                UserType.register(); // Register user
+                UserType.register(); 
                 System.out.println("Registration successful! Please log in to continue.");
             } else if (option == 2) {
-                UserType.login(); // Login validation (if incorrect, user retries)
-                isAuthenticated = true; // Allow access after successful login
+                UserType.login();
+                isAuthenticated = true;
             } else {
                 System.out.println("Please enter a valid choice!");
             }
         }
 
-        return true; // User is now logged in
+        return true;
     }
-
-    // Admin Menu
     private static void adminOperations(Scanner sc) {
         int adminChoice;
         do {
@@ -109,35 +107,9 @@ public class HostelManagementSystem {
 
     // Warden Menu
     private static void wardenOperations(Scanner sc) {
-        int wardenChoice;
-        do {
-            System.out.println("\nWarden Panel:");
-            System.out.println("1) Allocate Room");
-            System.out.println("2) View Complaints");
-            System.out.println("3) Track Visitors");
-            System.out.println("4) Exit");
-            System.out.print("Enter choice: ");
-            wardenChoice = sc.nextInt();
-
-            switch (wardenChoice) {
-                case 1:
-                    // Implement Allocate Room
-                    break;
-                case 2:
-                    // Implement View Complaints
-                    break;
-                case 3:
-                    // Implement Track Visitors
-                    break;
-                case 4:
-                    System.out.println("Exiting Warden Panel...");
-                    break;
-                default:
-                    System.out.println("Please enter a valid choice.");
-            }
-        } while (wardenChoice != 4);
+        Warden w=new Warden();
+        w.manageRooms();
     }
-
     // Student Menu
     private static void studentOperations(Scanner sc) {
         int studentChoice;
