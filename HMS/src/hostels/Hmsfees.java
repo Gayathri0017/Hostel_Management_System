@@ -70,7 +70,7 @@ public class Hmsfees {
 
         scanner.close();
     }
-    private static void setFoodPreference(Scanner scanner, String studentID) {
+    public static void setFoodPreference(Scanner scanner, String studentID) {
         if (foodPreferenceSet) {
             System.out.println("Food preference already set.");
             return;
@@ -101,7 +101,7 @@ public class Hmsfees {
     }
 
     
-    private static void payFees(Scanner scanner, String studentID) {
+    public static void payFees(Scanner scanner, String studentID) {
         System.out.println("\nPayment Methods:");
         System.out.println("1. Net Banking");
         System.out.println("2. UPI");
@@ -109,8 +109,12 @@ public class Hmsfees {
         System.out.println("4. Debit Card");
         System.out.print("Choose payment method: ");
         int paymentMethod = scanner.nextInt();
+        int studentIndex = findStudentIndex(studentID);
+        if (studentIndex != -1 && paymentMethods[studentIndex].equals(getPaymentMethodName(paymentMethod))) {
+            System.out.println("Payment of " + totalFees + " via " + getPaymentMethodName(paymentMethod) + " already made.");
+            return;
+        }
 
-        
         switch (paymentMethod) {
             case 1:
                 processNetBanking(scanner, studentID);
@@ -142,14 +146,23 @@ public class Hmsfees {
         }
     }
 
-    private static void processNetBanking(Scanner scanner, String studentID) {
+    private static String getPaymentMethodName(int method) {
+        switch (method) {
+            case 1: return "Net Banking";
+            case 2: return "UPI";
+            case 3: return "Credit Card";
+            case 4: return "Debit Card";
+            default: return "";
+        }
+    }
+
+    public static void processNetBanking(Scanner scanner, String studentID) {
         
         int studentIndexNetBanking = findStudentIndex(studentID);
-        if (studentIndexNetBanking != -1 && paymentMethods[studentIndexNetBanking].equals("Net Banking")) {
-            System.out.println("Payment of " + totalFees + " via Net Banking successful.");
+        if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("Net Banking")) {
+            System.out.println("Payment via Net Banking already made.");
             return;
         }
-
         String bankName = "";
         String accountNumber = "";
 
@@ -177,11 +190,11 @@ public class Hmsfees {
       
     }
 
-    private static void processUPI(Scanner scanner, String studentID) {
+    public static void processUPI(Scanner scanner, String studentID) {
        
         int studentIndexUPI = findStudentIndex(studentID);
-        if (studentIndexUPI != -1 && paymentMethods[studentIndexUPI].equals("UPI")) {
-            System.out.println("Payment of " + totalFees + " via UPI successful.");
+        if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("UPI")) {
+            System.out.println("Payment via UPI already made.");
             return;
         }
 
@@ -201,10 +214,10 @@ public class Hmsfees {
         studentCount++;
     }
 
-    private static void processCreditCard(Scanner scanner, String studentID) {
+    public static void processCreditCard(Scanner scanner, String studentID) {
         int studentIndexCreditCard = findStudentIndex(studentID);
-        if (studentIndexCreditCard != -1 && paymentMethods[studentIndexCreditCard].equals("Credit Card")) {
-            System.out.println("Payment of " + totalFees + " via Credit Card successful.");
+        if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("Credit Card")) {
+            System.out.println("Payment via Credit Card already made.");
             return;
         }
 
@@ -240,9 +253,10 @@ public class Hmsfees {
         accountDetails[studentCount] = cardNumber + " - " + cardHolderName + " - " + expiryDate; 
         studentCount++;
     }
-    private static void processDebitCard(Scanner scanner, String studentID) {
+    public static void processDebitCard(Scanner scanner, String studentID) {
         int studentIndexDebitCard = findStudentIndex(studentID);
-        if (studentIndexDebitCard != -1 && paymentMethods[studentIndexDebitCard].equals("Debit Card")) {
+        if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("Debit Card")) {
+            System.out.println("Payment via Debit Card already made.");
             return;
         }
 
@@ -282,7 +296,7 @@ public class Hmsfees {
         studentCount++;
     }
 
-    private static void viewFees(Scanner scanner, String studentID) {
+    public static void viewFees(Scanner scanner, String studentID) {
         int remainingFees = totalFees - balanceFees; 
         System.out.println("Total Fees: " + totalFees);
         System.out.println("Balance Fees: " + remainingFees);
@@ -292,7 +306,7 @@ public class Hmsfees {
             System.out.println("All fees have been paid.");
         }
     }
-    private static int findStudentIndex(String studentID) {
+    public static int findStudentIndex(String studentID) {
         for (int i = 0; i < studentCount; i++) {
             if (studentIDs[i].equals(studentID)) {
                 return i;
