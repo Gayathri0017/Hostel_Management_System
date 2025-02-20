@@ -89,7 +89,6 @@ public class Notification {
             System.out.println("Invalid admin ID.");
             return;
         }
-
         System.out.print("Enter Student ID: ");
         String studentID = scanner.nextLine();
         User1 student = findUserByID(studentID);
@@ -113,25 +112,20 @@ public class Notification {
             System.out.println("User not found.");
             return;
         }
-
         System.out.print("Enter Notification: ");
         String notification = scanner.nextLine();
         NotificationService.sendNotification(user, notification);
     }
-
     private static void viewMessages() {
         System.out.print("Enter User ID: ");
         String userID = scanner.nextLine();
         User1 user = findUserByID(userID);
-
         if (user == null) {
             System.out.println("User not found.");
             return;
         }
-
         user.showMessages();
     }
-
     private static User1 findUserByID(String userID) {
         for (User1 user : users) {
             if (user.userID.equals(userID)) {

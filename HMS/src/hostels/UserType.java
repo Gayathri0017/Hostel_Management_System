@@ -1,39 +1,34 @@
 package hostels;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 class User {
-    String userID,name,email,password,phoneNumber,role;
+    String userID, name, email, password, phoneNumber;
 
-    User(String userID,String name,String email,String password,String phoneNumber,String role) 
-    {
-        this.userID =userID;
-        this.name =name;
-        this.email =email;
-        this.password =password;
-        this.phoneNumber =phoneNumber;
-        this.role =role;
+    User(String userID, String name, String email, String password, String phoneNumber) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
     }
 }
+public class UserType {
+    private static final int Max = 50;
+    private static User[] users = new User[Max];
+    private static int userCount = 0;
+    private static Scanner s = new Scanner(System.in);
 
-public class UserType 
-{
-    private static final int Max=50;
-    private static User[] users=new User[Max];
-    private static int userCount=0;
-    private static Scanner s=new Scanner(System.in);
-    //comments
-    public static void main(String[] args) 
-    {
-        while(true) 
-        {
+    public static void main(String[] args) {
+        while (true) {
             System.out.println("\nHostel Management System");
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Update Profile");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            int choice=s.nextInt();
+            int choice = s.nextInt();
             s.nextLine();
             switch (choice) {
                 case 1:
@@ -55,34 +50,48 @@ public class UserType
     }
 
     public static void register() {
-        if (userCount>=Max) {
+        if (userCount >= Max) {
             System.out.println("User limit reached.");
             return;
         }
         System.out.print("Enter User ID: ");
-        String userID=s.nextLine();
-        if (findUserByID(userID)!=null) {
+        String userID = s.nextLine();
+        if (findUserByID(userID) != null) {
             System.out.println("User ID already exists.");
             return;
         }
 
-        System.out.print("Enter Name:");
-        String name=s.nextLine();
-        System.out.print("Enter Email: ");
-        String email=s.nextLine();
-        System.out.print("Enter Password: ");
-        String password=s.nextLine();
-        System.out.print("Enter Phone Number: ");
-        String phoneNumber=s.nextLine();
-        System.out.print("Enter Role (Student/Admin/Warden): ");
-        String role=s.nextLine();
+        System.out.print("Enter Name: ");
+        String name = s.nextLine();
 
-        if (!role.equalsIgnoreCase("Student") && !role.equalsIgnoreCase("Admin") && !role.equalsIgnoreCase("Warden")) {
-            System.out.println("Invalid role. Please enter Student, Admin, or Warden.");
-            return;
-        }
+        String email;
+        do {
+            System.out.print("Enter Email: ");
+            email = s.nextLine();
+            if (!isValidEmail(email)) {
+                System.out.println("Invalid email format. Please enter a valid email.");
+            }
+        } while (!isValidEmail(email));
 
-        users[userCount++]=new User(userID, name, email, password, phoneNumber, role);
+        String password;
+        do {
+            System.out.print("Enter Password: ");
+            password = s.nextLine();
+            if (!isValidPassword(password)) {
+                System.out.println("Invalid password! Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a digit, and a special character.");
+            }
+        } while (!isValidPassword(password));
+
+        String phoneNumber;
+        do {
+            System.out.print("Enter Phone Number: ");
+            phoneNumber = s.nextLine();
+            if (!isValidPhoneNumber(phoneNumber)) {
+                System.out.println("Invalid phone number! Phone number must be exactly 10 digits.");
+            }
+        } while (!isValidPhoneNumber(phoneNumber));
+
+        users[userCount++] = new User(userID, name, email, password, phoneNumber);
         System.out.println("Registration successful!");
     }
 
@@ -92,10 +101,9 @@ public class UserType
         System.out.print("Enter Password: ");
         String password = s.nextLine();
 
-        User user=findUserByID(userID);
+        User user = findUserByID(userID);
         if (user != null && user.password.equals(password)) {
             System.out.println("Login successful!");
-            welcomeMessage(user);
         } else {
             System.out.println("Invalid User ID or Password.");
         }
@@ -103,62 +111,65 @@ public class UserType
 
     public static void updateProfile() {
         System.out.print("Enter User ID: ");
-        String userID=s.nextLine();
-        User user=findUserByID(userID);
+        String userID = s.nextLine();
+        User user = findUserByID(userID);
 
-        if (user==null) {
+        if (user == null) {
             System.out.println("User not found.");
             return;
         }
 
         System.out.print("Enter New Name (Leave blank to keep current): ");
-        String newName=s.nextLine();
-        if (!newName.isEmpty())
-        	user.name=newName;
+        String newName = s.nextLine();
+        if (!newName.isEmpty()) user.name = newName;
 
-        System.out.print("Enter New Email (Leave blank to keep current): ");
-        String newEmail = s.nextLine();
-        if (!newEmail.isEmpty()) 
-        	user.email=newEmail;
+        String newEmail;
+        do {
+            System.out.print("Enter New Email (Leave blank to keep current): ");
+            newEmail = s.nextLine();
+            if (newEmail.isEmpty() || isValidEmail(newEmail)) break;
+            System.out.println("Invalid email format.");
+        } while (true);
+        if (!newEmail.isEmpty()) user.email = newEmail;
 
-        System.out.print("Enter New Password (Leave blank to keep current): ");
-        String newPassword = s.nextLine();
-        if (!newPassword.isEmpty()) 
-        	user.password=newPassword;
+        String newPassword;
+        do {
+            System.out.print("Enter New Password (Leave blank to keep current): ");
+            newPassword = s.nextLine();
+            if (newPassword.isEmpty() || isValidPassword(newPassword)) break;
+            System.out.println("Invalid password format.");
+        } while (true);
+        if (!newPassword.isEmpty()) user.password = newPassword;
 
-        System.out.print("Enter New Phone Number (Leave blank to keep current): ");
-        String newPhoneNumber = s.nextLine();
-        if (!newPhoneNumber.isEmpty()) 
-        	user.phoneNumber=newPhoneNumber;
+        String newPhoneNumber;
+        do {
+            System.out.print("Enter New Phone Number (Leave blank to keep current): ");
+            newPhoneNumber = s.nextLine();
+            if (newPhoneNumber.isEmpty() || isValidPhoneNumber(newPhoneNumber)) break;
+            System.out.println("Invalid phone number format.");
+        } while (true);
+        if (!newPhoneNumber.isEmpty()) user.phoneNumber = newPhoneNumber;
 
         System.out.println("Profile updated successfully!");
     }
-
-    public static User findUserByID(String userID) 
-    {
-        for (int i=0;i<userCount;i++) 
-        {
-            if (users[i].userID.equals(userID)) 
-            {
+    public static User findUserByID(String userID) {
+        for (int i = 0; i < userCount; i++) {
+            if (users[i].userID.equals(userID)) {
                 return users[i];
             }
         }
         return null;
     }
-
-    public static void welcomeMessage(User user) {
-        switch (user.role.toLowerCase()) {
-            case "student":
-                System.out.println("Welcome, Student " + user.name + "! Stay at the hostel.");
-                break;
-            case "admin":
-                System.out.println("Welcome, Admin " + user.name + "!");
-                break;
-            case "warden":
-                System.out.println("Welcome, Warden " + user.name + "!");
-                break;
-            default:
-                System.out.println("Welcome, " + user.name + "!");
-        }
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        return Pattern.matches(emailRegex, email);
+    }
+    public static boolean isValidPassword(String password) {
+        String passwordRegex = "^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
+        return Pattern.matches(passwordRegex, password);
+    }
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        String phoneRegex = "^[0-9]{10}$";
+        return Pattern.matches(phoneRegex, phoneNumber);
     }
 }
