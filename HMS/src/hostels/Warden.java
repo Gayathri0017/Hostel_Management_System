@@ -72,7 +72,7 @@ public class Warden {
                 	}
                 	break;
                 case 5:
-                	v.displayDetails();
+                	v.displayAllVisitors();
                 	break;
                 case 6:
                     System.out.println("Exiting room management.");

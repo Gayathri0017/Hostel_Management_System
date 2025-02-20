@@ -94,7 +94,7 @@ public class Student {
         hmsFees.payFees(scanner, studentID);
     }
     public void viewFees(Scanner scanner) {//yes
-        hmsFees.viewFees(studentID);
+        hmsFees.viewFees(scanner,studentID);
     }
     public void raiseComplaints() {
     	System.out.println("Enter the issue");
