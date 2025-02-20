@@ -116,7 +116,7 @@ public class Notification {
         String notification = scanner.nextLine();
         NotificationService.sendNotification(user, notification);
     }
-    private static void viewMessages() {
+    public static void viewMessages() {
         System.out.print("Enter User ID: ");
         String userID = scanner.nextLine();
         User1 user = findUserByID(userID);
