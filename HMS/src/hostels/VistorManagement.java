@@ -1,7 +1,5 @@
 package hostels;
-
 import java.util.*;
-
 class Visitor {
     String name;
     String inTime;
@@ -14,21 +12,18 @@ class Visitor {
         System.out.print("Enter InTime (HH:MM): ");
         inTime = sc.nextLine();
     }
-
     void exitDetails() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter OutTime (HH:MM) for " + name + ": ");
         outTime = sc.nextLine();
     }
-
     void displayDetails() {
         System.out.println("Visitor Name: " + name);
         System.out.println("InTime: " + inTime);
         System.out.println("OutTime: " + (outTime != null ? outTime : "Not recorded"));
     }
 }
-
-public class VistorManagement {
+public class VistorManagement{
     public static void main(String[] args) {
         Visitor visitor = new Visitor();
         visitor.enterDetails();
