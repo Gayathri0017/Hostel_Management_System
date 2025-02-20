@@ -75,6 +75,7 @@ public class HostelManagementSystem {
             System.out.println("5) Exit");
             System.out.print("Enter choice: ");
             adminChoice = sc.nextInt();
+            sc.nextInt();
             switch (adminChoice) {
                 case 1:
                     admin.createEvent();

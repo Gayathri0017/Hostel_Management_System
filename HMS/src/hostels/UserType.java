@@ -49,7 +49,6 @@ public class UserType {
             }
         }
     }
-
     public static void register() {
         if (userCount >= Max) {
             System.out.println("User limit reached.");
