@@ -14,6 +14,7 @@ class User {
         this.phoneNumber = phoneNumber;
     }
 }
+
 public class UserType {
     private static final int Max = 50;
     private static User[] users = new User[Max];
@@ -92,7 +93,6 @@ public class UserType {
         } while (!isValidPhoneNumber(phoneNumber));
 
         users[userCount++] = new User(userID, name, email, password, phoneNumber);
-        System.out.println("Registration successful!");
     }
 
     public static void login() {
@@ -152,6 +152,7 @@ public class UserType {
 
         System.out.println("Profile updated successfully!");
     }
+
     public static User findUserByID(String userID) {
         for (int i = 0; i < userCount; i++) {
             if (users[i].userID.equals(userID)) {
@@ -160,14 +161,17 @@ public class UserType {
         }
         return null;
     }
+
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         return Pattern.matches(emailRegex, email);
     }
+
     public static boolean isValidPassword(String password) {
-        String passwordRegex = "^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%?&])[A-Za-z\\d@$!%?&]{8,}$";
         return Pattern.matches(passwordRegex, password);
     }
+
     public static boolean isValidPhoneNumber(String phoneNumber) {
         String phoneRegex = "^[0-9]{10}$";
         return Pattern.matches(phoneRegex, phoneNumber);
