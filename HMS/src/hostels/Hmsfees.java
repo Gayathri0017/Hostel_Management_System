@@ -54,7 +54,7 @@ public class Hmsfees {
                     break;
 
                 case 3: 
-                    viewFees( studentID);
+                    viewFees(scanner, studentID);
                     break;
 
                 case 4: 
@@ -296,7 +296,7 @@ public class Hmsfees {
         studentCount++;
     }
 
-    public static void viewFees(String studentID) {
+    public static void viewFees(Scanner scanner, String studentID) {
         int remainingFees = totalFees - balanceFees; 
         System.out.println("Total Fees: " + totalFees);
         System.out.println("Balance Fees: " + remainingFees);
