@@ -107,7 +107,7 @@ public class HostelManagementSystem {
         System.out.print("Enter Student ID: ");
         String studentID = sc.nextLine();
         Student student = new Student(studentID);
-        while (true) {
+        while (true){
             System.out.println("\nStudent Panel:");
             System.out.println("1) View Room Details");
             System.out.println("2) Set Food Preference");
@@ -133,7 +133,7 @@ public class HostelManagementSystem {
                     student.payFees(sc);
                     break;
                 case 4:
-                    student.viewFees(sc);
+                    student.viewFees(studentID);
                     break;
                 case 5:
                     student.raiseComplaints();
