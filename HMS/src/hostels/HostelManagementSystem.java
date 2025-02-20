@@ -2,18 +2,14 @@ package hostels;
 import java.util.Scanner;
 
 public class HostelManagementSystem {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to Hostel Management System!");
-        
-        int role = chooseUserRole(sc); // User selects role at the start
-
-        // Ensure user is registered and logged in before proceeding
+        int role = chooseUserRole(sc);
         if (!handleUserAuthentication(sc)) {
             System.out.println("Authentication failed. Exiting...");
             return;
         }
-
         switch (role) {
             case 1:
                 adminOperations(sc);
@@ -30,8 +26,6 @@ public class HostelManagementSystem {
 
         sc.close();
     }
-
-    // Function to let user choose role
     private static int chooseUserRole(Scanner sc) {
         int role;
         do {
@@ -45,21 +39,17 @@ public class HostelManagementSystem {
                 System.out.println("Invalid choice! Please enter a valid role.");
             }
         } while (role < 1 || role > 3);
-        
         return role;
     }
-
-    // Handles user authentication (ensures registration and login)
     private static boolean handleUserAuthentication(Scanner sc) {
         boolean isAuthenticated = false;
-
         while (!isAuthenticated) {
-            System.out.println("\n1) Register\n2) Login");
+            System.out.println("1)Register\n2) Login");
             int option = sc.nextInt();
             sc.nextLine();
 
             if (option == 1) {
-                UserType.register(); 
+                UserType.register();
                 System.out.println("Registration successful! Please log in to continue.");
             } else if (option == 2) {
                 UserType.login();
@@ -72,29 +62,33 @@ public class HostelManagementSystem {
         return true;
     }
     private static void adminOperations(Scanner sc) {
+    	 Hmsfees f=new Hmsfees();
+        Admin admin = new Admin();
+        Maintenance m=new Maintenance();
         int adminChoice;
         do {
             System.out.println("\nAdmin Panel:");
-            System.out.println("1) View Students Records");
-            System.out.println("2) View Room Details");
+            System.out.println("1) Create Event");
+            System.out.println("2) View Events");
             System.out.println("3) View Fees Records");
             System.out.println("4) View Complaints");
             System.out.println("5) Exit");
             System.out.print("Enter choice: ");
             adminChoice = sc.nextInt();
-
             switch (adminChoice) {
                 case 1:
-                    // Implement View Student Records
+                    admin.createEvent();
                     break;
                 case 2:
-                    // Implement View Room Details
+                    admin.displayEvents();
                     break;
                 case 3:
-                    // Implement View Fees Records
+                	System.out.println("Enter student index to get fee status");
+                	int index=sc.nextInt();
+                    f.viewFees(index);
                     break;
                 case 4:
-                    // Implement View Complaints
+                    m.viewRequests();
                     break;
                 case 5:
                     System.out.println("Exiting Admin Panel...");
@@ -105,40 +99,69 @@ public class HostelManagementSystem {
         } while (adminChoice != 5);
     }
 
-    // Warden Menu
     private static void wardenOperations(Scanner sc) {
-        Warden w=new Warden();
-        w.manageRooms();
+        Warden warden = new Warden();
+        warden.manageRooms();
     }
-    // Student Menu
     private static void studentOperations(Scanner sc) {
-        int studentChoice;
-        do {
+        System.out.print("Enter Student ID: ");
+        String studentID = sc.nextLine();
+        Student student = new Student(studentID);
+        while (true) {
             System.out.println("\nStudent Panel:");
             System.out.println("1) View Room Details");
-            System.out.println("2) Make Payment");
-            System.out.println("3) Raise Complaint");
-            System.out.println("4) Exit");
-            System.out.print("Enter choice: ");
-            studentChoice = sc.nextInt();
-
+            System.out.println("2) Set Food Preference");
+            System.out.println("3) Pay Fees");
+            System.out.println("4) View Fees");
+            System.out.println("5) Raise Complaints");
+            System.out.println("6) View Notifications");
+            System.out.println("7) View Upcoming Events");
+            System.out.println("8) Update Profile");
+            System.out.println("9) Contact Warden");
+            System.out.println("10) Exit");
+            System.out.print("Enter your choice: ");
+            int studentChoice = sc.nextInt();
+            sc.nextLine();
             switch (studentChoice) {
                 case 1:
-                    // Implement View Room Details
+                    student.viewRoomDetails(); 
                     break;
                 case 2:
-                    // Implement Make Payment
+                    student.setFoodPreference(sc);
                     break;
                 case 3:
-                    // Implement Raise Complaint
+                    student.payFees(sc);
                     break;
                 case 4:
-                    System.out.println("Exiting Student Panel...");
+                    student.viewFees(sc);
                     break;
-                default:
-                    System.out.println("Please enter a valid choice.");
-            }
-        } while (studentChoice != 4);
-    }
-}
+                case 5:
+                    student.raiseComplaints();
+                    break;
+                case 6:
+                    student.viewNotifications();
+                    break;
+                case 7:
+                    student.viewUpcomingEvents();
+                    break;
+                case 8:
+                    student.profileUpdation();
+                    break;
+                case 9:
+                    student.contact();
+                    break;
+                case 10:
+                    System.out.println("Exiting Student Panel...");
+                    return;
 
+                default:
+
+                    System.out.println("Invalid choice! Please try again.");
+
+            }
+
+        }
+
+    }
+
+}
