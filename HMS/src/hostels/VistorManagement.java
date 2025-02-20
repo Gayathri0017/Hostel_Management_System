@@ -23,7 +23,7 @@ class Visitor {
         System.out.println("OutTime: " + (outTime != null ? outTime : "Not recorded"));
     }
 }
-public class HostelVisitorManagement {
+public class VistorManagement{
     public static void main(String[] args) {
         Visitor visitor = new Visitor();
         visitor.enterDetails();

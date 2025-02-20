@@ -78,7 +78,7 @@ public class EventManagement {
         events.add(newEvent);
         System.out.println("Event created successfully!");
     }
-    private void viewEvents() {
+    public void viewEvents() {
         System.out.println("\n----- List of Events -----");
         if (events.isEmpty()) {
             System.out.println("No events available.");
