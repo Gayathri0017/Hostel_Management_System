@@ -28,7 +28,7 @@ class Visitor {
     }
 }
 
-public class HostelVisitorManagement {
+public class VistorManagement {
     public static void main(String[] args) {
         Visitor visitor = new Visitor();
         visitor.enterDetails();
