@@ -84,7 +84,7 @@ public class HostelManagementSystem {
                     break;
                 case 3:
                 	System.out.println("Enter student index to get fee status");
-                	int index=sc.nextInt();
+                	String index=sc.nextLine();
                     f.viewFees(index);
                     break;
                 case 4:

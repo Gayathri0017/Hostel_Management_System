@@ -23,7 +23,7 @@ class Visitor {
         System.out.println("OutTime: " + (outTime != null ? outTime : "Not recorded"));
     }
 }
-public class VistorManagement{
+public class VistorManagement extends Visitor{
     public static void main(String[] args) {
         Visitor visitor = new Visitor();
         visitor.enterDetails();
