@@ -58,7 +58,7 @@ public class Student {
 	                    student.payFees(scanner);
 	                    break;
 	                case 4:
-	                    student.viewFees(scanner);
+	                    student.viewFees(studentID);
 	                    break;
 	                case 5:
 	                    student.raiseComplaints();
@@ -93,7 +93,7 @@ public class Student {
     public void payFees(Scanner scanner) {//yes
         hmsFees.payFees(scanner, studentID);
     }
-    public void viewFees(Scanner scanner) {//yes
+    public void viewFees(String studentID) {//yes
         hmsFees.viewFees(studentID);
     }
     public void raiseComplaints() {

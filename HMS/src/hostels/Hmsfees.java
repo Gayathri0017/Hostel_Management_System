@@ -50,7 +50,7 @@ public class Hmsfees {
                 case 2:
                     payFees(scanner, studentID);
                     break;
-                case 3:
+                case 3: 
                     viewFees(studentID);
                     break;
                 case 4:
