@@ -9,15 +9,14 @@ public class Hmsfees {
     private static final int NON_VEG_FOOD_FEES = 5000;
 
     private static int totalFees = 0;
-    private static int balanceFees = 0; 
-    private static String[] studentIDs = new String[100]; 
-    private static String[] paymentMethods = new String[100]; 
-    private static String[] accountDetails = new String[100]; 
-    private static int studentCount = 0; 
-    private static boolean foodPreferenceSet = false; 
+    private static int balanceFees = 0;
+    private static String[] studentIDs = new String[100];
+    private static String[] paymentMethods = new String[100];
+    private static String[] accountDetails = new String[100];
+    private static int studentCount = 0;
+    private static boolean foodPreferenceSet = false;
 
-    public static void main(String[] args) 
-    {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your student ID: ");
         String studentID = scanner.next();
@@ -48,20 +47,16 @@ public class Hmsfees {
                 case 1:
                     setFoodPreference(scanner, studentID);
                     break;
-
-                case 2: 
+                case 2:
                     payFees(scanner, studentID);
                     break;
-
                 case 3: 
                     viewFees(studentID);
                     break;
-
-                case 4: 
+                case 4:
                     System.out.println("Exit.");
                     running = false;
                     break;
-
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
@@ -70,6 +65,7 @@ public class Hmsfees {
 
         scanner.close();
     }
+
     public static void setFoodPreference(Scanner scanner, String studentID) {
         if (foodPreferenceSet) {
             System.out.println("Food preference already set.");
@@ -78,9 +74,10 @@ public class Hmsfees {
 
         System.out.println("Do you want food? (1 for Yes, 2 for No): ");
         int foodChoice = scanner.nextInt();
-        
+
         if (foodChoice == 1) {
             System.out.println("Choose food type (1 for Veg, 2 for Non-Veg): ");
+            totalFees+=SHARING_ROOM_FEES;
             int foodType = scanner.nextInt();
             if (foodType == 1) {
                 totalFees += VEG_FOOD_FEES;
@@ -96,11 +93,10 @@ public class Hmsfees {
         } else {
             System.out.println("Invalid choice.");
         }
-        
-        foodPreferenceSet = true; 
+
+        foodPreferenceSet = true;
     }
 
-    
     public static void payFees(Scanner scanner, String studentID) {
         System.out.println("\nPayment Methods:");
         System.out.println("1. Net Banking");
@@ -130,7 +126,7 @@ public class Hmsfees {
                 break;
             default:
                 System.out.println("Invalid payment method selected.");
-                return; 
+                return;
         }
 
         System.out.print("Enter the amount you want to pay: ");
@@ -138,7 +134,7 @@ public class Hmsfees {
 
         if (paymentAmount > totalFees - balanceFees) {
             int excessAmount = paymentAmount - (totalFees - balanceFees);
-            balanceFees = totalFees; 
+            balanceFees = totalFees;
             System.out.println("Payment of " + paymentAmount + " successful. Excess amount returned: " + excessAmount);
         } else {
             balanceFees += paymentAmount;
@@ -157,7 +153,6 @@ public class Hmsfees {
     }
 
     public static void processNetBanking(Scanner scanner, String studentID) {
-        
         int studentIndexNetBanking = findStudentIndex(studentID);
         if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("Net Banking")) {
             System.out.println("Payment via Net Banking already made.");
@@ -187,11 +182,9 @@ public class Hmsfees {
         paymentMethods[studentCount] = "Net Banking";
         accountDetails[studentCount] = bankName + " - " + accountNumber;
         studentCount++;
-      
     }
 
     public static void processUPI(Scanner scanner, String studentID) {
-       
         int studentIndexUPI = findStudentIndex(studentID);
         if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("UPI")) {
             System.out.println("Payment via UPI already made.");
@@ -210,7 +203,7 @@ public class Hmsfees {
         }
         studentIDs[studentCount] = studentID;
         paymentMethods[studentCount] = "UPI";
-        accountDetails[studentCount] = upiID; 
+        accountDetails[studentCount] = upiID;
         studentCount++;
     }
 
@@ -250,9 +243,10 @@ public class Hmsfees {
         }
         studentIDs[studentCount] = studentID;
         paymentMethods[studentCount] = "Credit Card";
-        accountDetails[studentCount] = cardNumber + " - " + cardHolderName + " - " + expiryDate; 
+        accountDetails[studentCount] = cardNumber + " - " + cardHolderName + " - " + expiryDate;
         studentCount++;
     }
+
     public static void processDebitCard(Scanner scanner, String studentID) {
         int studentIndexDebitCard = findStudentIndex(studentID);
         if (findStudentIndex(studentID) != -1 && paymentMethods[findStudentIndex(studentID)].equals("Debit Card")) {
@@ -292,12 +286,12 @@ public class Hmsfees {
 
         studentIDs[studentCount] = studentID;
         paymentMethods[studentCount] = "Debit Card";
-        accountDetails[studentCount] = cardNumber + " - " + cardHolderName + " - " + expiryDate; // Store combined details
+        accountDetails[studentCount] = cardNumber + " - " + cardHolderName + " - " + expiryDate;
         studentCount++;
     }
 
     public static void viewFees(String studentID) {
-        int remainingFees = totalFees - balanceFees; 
+        int remainingFees = totalFees - balanceFees;
         System.out.println("Total Fees: " + totalFees);
         System.out.println("Balance Fees: " + remainingFees);
         if (remainingFees > 0) {
@@ -306,6 +300,7 @@ public class Hmsfees {
             System.out.println("All fees have been paid.");
         }
     }
+
     public static int findStudentIndex(String studentID) {
         for (int i = 0; i < studentCount; i++) {
             if (studentIDs[i].equals(studentID)) {
@@ -315,3 +310,5 @@ public class Hmsfees {
         return -1;
     }
 }
+
+
