@@ -14,7 +14,7 @@ class User {
         this.phoneNumber = phoneNumber;
     }
 }
-
+  
 public class UserType {
     private static final int Max = 50;
     private static User[] users = new User[Max];
