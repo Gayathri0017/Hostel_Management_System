@@ -12,7 +12,7 @@ public class HostelManagementSystem {
         }
         switch (role) {
             case 1:
-                adminOperations(sc);
+            	adminOperations(sc);
                 break;
             case 2:
                 wardenOperations(sc);
@@ -61,42 +61,44 @@ public class HostelManagementSystem {
 
         return true;
     }
-    private static void adminOperations(Scanner sc) {
-    	 Hmsfees f=new Hmsfees();
-        Admin admin = new Admin();
-        Maintenance m=new Maintenance();
-        int adminChoice;
-        do {
-            System.out.println("\nAdmin Panel:");
-            System.out.println("1) Create Event");
-            System.out.println("2) View Events");
-            System.out.println("3) View Fees Records");
-            System.out.println("4) View Complaints");
-            System.out.println("5) Exit");
-            System.out.print("Enter choice: ");
-            adminChoice = sc.nextInt();
-            switch (adminChoice) {
-                case 1:
-                    admin.createEvent();
-                    break;
-                case 2:
-                    admin.displayEvents();
-                    break;
-                case 3:
-                	System.out.println("Enter student index to get fee status");
-                	String index=sc.nextLine();
-                    f.viewFees(index);
-                    break;
-                case 4:
-                    m.viewRequests();
-                    break;
-                case 5:
-                    System.out.println("Exiting Admin Panel...");
-                    break;
-                default:
-                    System.out.println("Please enter a valid choice.");
-            }
-        } while (adminChoice != 5);
+        private static void adminOperations(Scanner sc) {
+            Hmsfees f = new Hmsfees();
+            Admin admin = new Admin();
+            Maintenance m = new Maintenance();
+            int adminChoice;
+            do {
+                System.out.println("\nAdmin Panel:");
+                System.out.println("1) Create Event");
+                System.out.println("2) View Events");
+                System.out.println("3) View Fees Records");
+                System.out.println("4) View Complaints");
+                System.out.println("5) Exit");
+                System.out.print("Enter choice: ");
+                adminChoice = sc.nextInt();
+                sc.nextLine(); // Consume newline
+                switch (adminChoice) {
+                    case 1:
+                        admin.createEvent();
+                        break;
+                    case 2:
+                        admin.displayEvents();
+                        break;
+                    case 3:
+                        System.out.println("Enter student index to get fee status");
+                        String index = sc.nextLine();
+                        f.viewFees(index);
+                        break;
+                    case 4:
+                        m.viewRequests(); // Call to view maintenance requests
+                        break;
+                    case 5:
+                        System.out.println("Exiting Admin Panel...");
+                        break;
+                    default:
+                        System.out.println("Please enter a valid choice.");
+                }
+            } while (adminChoice != 5);
+   
     }
 
     private static void wardenOperations(Scanner sc) {
