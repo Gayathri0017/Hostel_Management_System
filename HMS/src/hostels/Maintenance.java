@@ -3,8 +3,8 @@ package hostels;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Maintenance extends HostelManagementSystem{
-	private static ArrayList<Request> requests = new ArrayList<>();
+public class Maintenance {
+    private static ArrayList<Request> requests = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public void manageRequests() {
@@ -16,7 +16,7 @@ class Maintenance extends HostelManagementSystem{
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     raiseRequest();
@@ -57,6 +57,7 @@ class Maintenance extends HostelManagementSystem{
             System.out.println("------------------------------------");
         }
     }
+
     private void updateRequestStatus() {
         if (requests.isEmpty()) {
             System.out.println("No requests available.");
@@ -64,7 +65,7 @@ class Maintenance extends HostelManagementSystem{
         }
         System.out.print("Enter Request ID to update: ");
         int requestID = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         for (Request req : requests) {
             if (req.requestID == requestID) {
                 System.out.print("Enter new status (Pending/Resolved): ");
