@@ -1,9 +1,12 @@
 package hostels;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Maintenance {
-    private static ArrayList<Request> requests = new ArrayList<>();
+
+class Maintenance extends HostelManagementSystem{
+	private static ArrayList<Request> requests = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
+
     public void manageRequests() {
         while (true) {
             System.out.println("\nRequest Management System");
@@ -13,7 +16,7 @@ public class Maintenance {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume newline
             switch (choice) {
                 case 1:
                     raiseRequest();
@@ -32,6 +35,7 @@ public class Maintenance {
             }
         }
     }
+
     private void raiseRequest() {
         System.out.print("Enter issue description: ");
         String issueDescription = scanner.nextLine();
@@ -53,7 +57,6 @@ public class Maintenance {
             System.out.println("------------------------------------");
         }
     }
-
     private void updateRequestStatus() {
         if (requests.isEmpty()) {
             System.out.println("No requests available.");
@@ -61,7 +64,7 @@ public class Maintenance {
         }
         System.out.print("Enter Request ID to update: ");
         int requestID = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Consume newline
         for (Request req : requests) {
             if (req.requestID == requestID) {
                 System.out.print("Enter new status (Pending/Resolved): ");
@@ -74,6 +77,7 @@ public class Maintenance {
         System.out.println("Request ID not found.");
     }
 }
+
 class Request {
     int requestID;
     String issueDescription;
