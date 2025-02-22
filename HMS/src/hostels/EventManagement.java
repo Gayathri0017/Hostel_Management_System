@@ -1,51 +1,41 @@
 package hostels;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 class Event {
     String eventID;
     String eventName;
     String eventDate;
     String eventDescription;
+
     Event(String eventID, String eventName, String eventDate, String eventDescription) {
-
         this.eventID = eventID;
-
         this.eventName = eventName;
-
         this.eventDate = eventDate;
-
         this.eventDescription = eventDescription;
     }
 }
+
 public class EventManagement {
     private List<Event> events; // List to store events
     private Scanner scanner;
+
     public EventManagement() {
-
         this.events = new ArrayList<>();
-
         this.scanner = new Scanner(System.in);
-
     }
+
     public void manageEvents() {
-
         while (true) {
-
             System.out.println("\n----- Event Management -----");
-
             System.out.println("1) Create Event");
-
             System.out.println("2) View Events");
-
             System.out.println("3) Delete Event");
-
             System.out.println("4) Exit");
-
             System.out.print("Enter your choice: ");
-
             int choice = scanner.nextInt();
-
             scanner.nextLine(); // Consume newline character
             switch (choice) {
                 case 1:
@@ -55,8 +45,8 @@ public class EventManagement {
                     viewEvents();
                     break;
                 case 3:
-                   deleteEvent();
-                   break;
+                    deleteEvent();
+                    break;
                 case 4:
                     System.out.println("Exiting event management.");
                     return;
@@ -65,6 +55,7 @@ public class EventManagement {
             }
         }
     }
+
     private void createEvent() {
         System.out.print("Enter Event ID: ");
         String eventID = scanner.nextLine();
@@ -78,6 +69,7 @@ public class EventManagement {
         events.add(newEvent);
         System.out.println("Event created successfully!");
     }
+
     public void viewEvents() {
         System.out.println("\n----- List of Events -----");
         if (events.isEmpty()) {
@@ -89,6 +81,7 @@ public class EventManagement {
                     event.eventID, event.eventName, event.eventDate, event.eventDescription);
         }
     }
+
     private void deleteEvent() {
         System.out.print("Enter Event ID to delete: ");
         String eventID = scanner.nextLine();
@@ -102,7 +95,6 @@ public class EventManagement {
         if (eventToDelete != null) {
             events.remove(eventToDelete);
             System.out.println("Event deleted successfully!");
-
         } else {
             System.out.println("Event not found.");
         }
